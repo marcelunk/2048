@@ -1,0 +1,4 @@
+Make a proper game out of it:
+	- Web server (using Java Spring Boot)
+	- full game features
+	- best solution using BDD
