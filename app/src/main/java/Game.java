@@ -30,6 +30,10 @@ public class Game {
     gameBoard.executeMove(direction);
   }
 
+  public GameBoard getGameBoard() {
+    return this.gameBoard;
+  }
+
 
   public static void main(String[] args) {
     Game game = null;
