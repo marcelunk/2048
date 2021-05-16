@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.FileReader;
+import java.io.InputStreamReader;
 
 public class Game {
 
@@ -26,7 +27,7 @@ public class Game {
     }
   }
 
-  public void executeMove(Direction move) {
+  public void executeMove(Move move) {
     gameBoard.executeMove(move);
   }
 
@@ -38,15 +39,16 @@ public class Game {
   public static void main(String[] args) {
     Game game = null;
     try {
-      //BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-      BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\marce\\Documents\\Programming\\Java\\Kattis\\2048\\app\\src\\main\\java\\8.in"));
+      BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+      //BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\marce\\Documents\\Programming\\Java\\Kattis\\2048\\app\\src\\main\\java\\8.in"));
       game = new Game();
       if(reader.ready()) {
         game.initializeGameBoard(reader);
-        game.printGame();
-        System.out.println("-----");
-        Direction direction = getDirection(Integer.parseInt(reader.readLine()));
-        game.executeMove(direction);
+        // game.printGame();
+        // System.out.println("-----");
+        int moveInMove = Integer.parseInt(reader.readLine());
+        Move move = getMove(moveInMove);
+        game.executeMove(move);
       }
     } catch(IOException e) {
       e.printStackTrace();
@@ -54,16 +56,16 @@ public class Game {
     game.printGame();
   }
 
-  private static Direction getDirection(int move) {
+  private static Move getMove(int move) {
     switch(move) {
       case 0:
-        return Direction.Left;
+        return Move.Left;
       case 1:
-        return Direction.Up;
+        return Move.Up;
       case 2:
-        return Direction.Right;
+        return Move.Right;
       case 3:
-        return Direction.Down;
+        return Move.Down;
       default:
         return null;
     }
