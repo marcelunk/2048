@@ -24,7 +24,7 @@ public class GameBoard {
   private void setAllTilesNotMerged() {
     for(int row=0; row<4; row++) {
       for(int col=0; col<4; col++) {
-        gameBoard[row][col].notMerged();
+        gameBoard[row][col].setMerged(false);
       }
     }
   }

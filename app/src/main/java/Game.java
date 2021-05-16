@@ -20,7 +20,7 @@ public class Game {
       for(int col=0; col<4; col++) {
         Coordination coordination = new Coordination(row, col);
         int value = Integer.parseInt(rowInput[col]);
-        Tile tile = new Tile(coordination, value);
+        Tile tile = new Tile(value);
         gameBoard.setTile(coordination, tile);
       }
     }

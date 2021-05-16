@@ -7,21 +7,7 @@ public enum Move {
           if(tile.getValue() > 0) {
             for(int left=col-1; left>=0; left--) {
               Tile tileOnLeft = gameBoard[row][left];
-              if(tileOnLeft.getValue() == 0) {
-                tileOnLeft.setValue(tile.getValue());
-                Tile tileTemp = tileOnLeft;
-                tile.setValue(0);
-                tile = tileTemp;
-              } else if(tileOnLeft.getValue() == tile.getValue() && !tileOnLeft.getMerged()) {
-                tileOnLeft.setValue(tileOnLeft.getValue()*2);
-                Tile tileTemp = tileOnLeft;
-                tile.setValue(0);
-                tile = tileTemp;
-                tile.merged();
-                break;
-              } else {
-                break;
-              }
+              swapTiles(tile, tileOnLeft);
             }
           }
         }
@@ -42,11 +28,12 @@ public enum Move {
                 Tile tileTemp = tileOnTop;
                 tile.setValue(0);
                 tile = tileTemp;
-              } else if(tileOnTop.getValue() == tile.getValue()) {
+              } else if(tileOnTop.getValue() == tile.getValue() && !tileOnTop.getMerged()) {
                 tileOnTop.setValue(tileOnTop.getValue()*2);
                 Tile tileTemp = tileOnTop;
                 tile.setValue(0);
                 tile = tileTemp;
+                tile.setMerged(true);
                 break;
               } else {
                 break;
@@ -71,11 +58,12 @@ public enum Move {
                 Tile tileTemp = tileOnRight;
                 tile.setValue(0);
                 tile = tileTemp;
-              } else if(tileOnRight.getValue() == tile.getValue()) {
+              } else if(tileOnRight.getValue() == tile.getValue() && !tileOnRight.getMerged()) {
                 tileOnRight.setValue(tileOnRight.getValue()*2);
                 Tile tileTemp = tileOnRight;
                 tile.setValue(0);
                 tile = tileTemp;
+                tile.setMerged(true);
                 break;
               } else {
                 break;
@@ -100,11 +88,12 @@ public enum Move {
                 Tile tileTemp = tileBelow;
                 tile.setValue(0);
                 tile = tileTemp;
-              } else if(tileBelow.getValue() == tile.getValue()) {
+              } else if(tileBelow.getValue() == tile.getValue()&& !tileBelow.getMerged()) {
                 tileBelow.setValue(tileBelow.getValue()*2);
                 Tile tileTemp = tileBelow;
                 tile.setValue(0);
                 tile = tileTemp;
+                tile.setMerged(true);
                 break;
               } else {
                 break;
@@ -118,5 +107,23 @@ public enum Move {
   };
 
   abstract Tile[][] execute(Tile[][] gameBoard);
+
+  private static void swapTiles(Tile tile, Tile nextTile) {
+    if(nextTile.getValue() == 0) {
+      //nextTile.setValue(tile.getValue());
+      //tile.setValue(0);
+      nextTile = tile;
+      tile.setValue(0);
+    } else if(nextTile.getValue() == tile.getValue() && !nextTile.getMerged()) {
+      nextTile.setValue(nextTile.getValue()*2);
+      Tile tileTemp = nextTile;
+      tile.setValue(0);
+      tile = tileTemp;
+      tile.setMerged(true);
+      //break;
+    } else {
+      //break;
+    }
+  }
 
 }
