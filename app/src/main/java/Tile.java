@@ -2,6 +2,7 @@ public class Tile {
 
   private Coordination coordination;
   private int value;
+  private boolean merged = false;
 
   public Tile(Coordination coordination, int value) {
     this.coordination = coordination;
@@ -18,6 +19,18 @@ public class Tile {
 
   public void setValue(int value) {
     this.value = value;
+  }
+
+  public void merged() {
+    this.merged = true;
+  }
+
+  public void notMerged() {
+    this.merged = false;
+  }
+
+  public boolean getMerged() {
+    return this.merged;
   }
 
   @Override

@@ -13,11 +13,20 @@ public class GameBoard {
   }
 
   public void executeMove(Move move) {
+    setAllTilesNotMerged();
     this.gameBoard = move.execute(gameBoard);
   }
 
   public Tile[][] getGameBoard() {
     return this.gameBoard;
+  }
+
+  private void setAllTilesNotMerged() {
+    for(int row=0; row<4; row++) {
+      for(int col=0; col<4; col++) {
+        gameBoard[row][col].notMerged();
+      }
+    }
   }
 
   public void printGameState() {

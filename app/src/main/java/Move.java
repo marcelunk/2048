@@ -12,11 +12,12 @@ public enum Move {
                 Tile tileTemp = tileOnLeft;
                 tile.setValue(0);
                 tile = tileTemp;
-              } else if(tileOnLeft.getValue() == tile.getValue()) {
+              } else if(tileOnLeft.getValue() == tile.getValue() && !tileOnLeft.getMerged()) {
                 tileOnLeft.setValue(tileOnLeft.getValue()*2);
                 Tile tileTemp = tileOnLeft;
                 tile.setValue(0);
                 tile = tileTemp;
+                tile.merged();
                 break;
               } else {
                 break;
