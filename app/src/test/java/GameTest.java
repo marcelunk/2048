@@ -5,6 +5,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.File;
 import java.io.IOException;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+import org.junit.runner.RunWith;
+import static org.junit.Assert.assertEquals;
 
 public class GameTest {
 
@@ -24,7 +28,7 @@ public class GameTest {
   }
 
   @Before
-  public void initGameSolution () {
+  public void initGameSolution() {
     this.gameSolution = new Game();
     String resourceName = "1-Solution.in";
     try {
@@ -43,9 +47,21 @@ public class GameTest {
     return reader;
   }
 
+  @Parameterized.Parameters
+  public static String[] primeNumbers() {
+     return Arrays.asList(new Object[][] {
+        { 2, true },
+        { 6, false },
+        { 19, true },
+        { 22, false },
+        { 23, true }
+     });
+  }
+
   @Test
+  @RunWith(Parameterized.class)
   public void testGame() {
-    this.game.executeMove(Direction.Left);
+    this.game.executeMove(Move.Left);
     Tile[][] gameBoard = this.game.getGameBoard().getGameBoard();
     Tile[][] gameBoardSolution = this.gameSolution.getGameBoard().getGameBoard();
     for(int row=0; row<4; row++) {
