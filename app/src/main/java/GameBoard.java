@@ -13,7 +13,7 @@ public class GameBoard {
   }
 
   public void executeMove(Move move) {
-    this.gameBoard = move.move(gameBoard);
+    this.gameBoard = move.execute(gameBoard);
   }
 
   public Tile[][] getGameBoard() {
