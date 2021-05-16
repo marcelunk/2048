@@ -45,7 +45,7 @@ public class GameTest {
 
   @Test
   public void testGame() {
-    this.game.executeMove(Move.Left);
+    this.game.executeMove(Direction.Left);
     Tile[][] gameBoard = this.game.getGameBoard().getGameBoard();
     Tile[][] gameBoardSolution = this.gameSolution.getGameBoard().getGameBoard();
     for(int row=0; row<4; row++) {

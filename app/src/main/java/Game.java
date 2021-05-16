@@ -26,7 +26,7 @@ public class Game {
     }
   }
 
-  public void executeMove(Move move) {
+  public void executeMove(Direction move) {
     gameBoard.executeMove(move);
   }
 
@@ -45,9 +45,8 @@ public class Game {
         game.initializeGameBoard(reader);
         game.printGame();
         System.out.println("-----");
-        int moveInMove = Integer.parseInt(reader.readLine());
-        Move move = getMove(moveInMove);
-        game.executeMove(move);
+        Direction direction = getDirection(Integer.parseInt(reader.readLine()));
+        game.executeMove(direction);
       }
     } catch(IOException e) {
       e.printStackTrace();
@@ -55,16 +54,16 @@ public class Game {
     game.printGame();
   }
 
-  private static Move getMove(int move) {
+  private static Direction getDirection(int move) {
     switch(move) {
       case 0:
-        return Move.Left;
+        return Direction.Left;
       case 1:
-        return Move.Up;
+        return Direction.Up;
       case 2:
-        return Move.Right;
+        return Direction.Right;
       case 3:
-        return Move.Down;
+        return Direction.Down;
       default:
         return null;
     }

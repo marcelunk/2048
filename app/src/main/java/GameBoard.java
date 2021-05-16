@@ -12,9 +12,9 @@ public class GameBoard {
     this.gameBoard[row][col] = tile;
   }
 
-  public void executeMove(Move move) {
+  public void executeMove(Direction direction) {
     setAllTilesNotMerged();
-    this.gameBoard = move.execute(gameBoard);
+    this.gameBoard = Move.execute(direction, gameBoard);
   }
 
   public Tile[][] getGameBoard() {
