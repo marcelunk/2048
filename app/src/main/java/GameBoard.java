@@ -29,7 +29,8 @@ public class GameBoard {
     }
   }
 
-  public void printGameState() {
+  @Override
+  public String toString() {
     StringBuilder builder = new StringBuilder();
     for(int row=0; row<4; row++) {
       for(int col=0; col<4; col++) {
@@ -39,6 +40,6 @@ public class GameBoard {
       builder.deleteCharAt(builder.length()-1);
       builder.append("\n");
     }
-    System.out.print(builder.toString());
+    return builder.toString();
   }
 }

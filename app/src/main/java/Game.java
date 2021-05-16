@@ -12,7 +12,7 @@ public class Game {
   }
 
   public void printGame() {
-    this.gameBoard.printGameState();
+    System.out.println(this.gameBoard);
   }
 
   public void initializeGameBoard(BufferedReader reader) throws IOException {
@@ -39,8 +39,8 @@ public class Game {
   public static void main(String[] args) {
     Game game = null;
     try {
-      BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-      //BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\marce\\Documents\\Programming\\Java\\Kattis\\2048\\app\\src\\main\\java\\8.in"));
+      //BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+      BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\marce\\Documents\\Programming\\Java\\Kattis\\2048\\app\\src\\main\\java\\8.in"));
       game = new Game();
       if(reader.ready()) {
         game.initializeGameBoard(reader);

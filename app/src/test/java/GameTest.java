@@ -5,23 +5,49 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collection;
+
 import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.assertEquals;
 
+@RunWith(Parameterized.class)
 public class GameTest {
 
+  private String boardResource;
+  private String moveResource;
+  private String solutionResource;
   private Game game;
   private Game gameSolution;
+  private Move move;
+
+  @Parameterized.Parameters
+  public static Collection resources() {
+     return Arrays.asList(new Object[][] {
+        { "1.in", "1-Move.in", "1-Solution.in" },
+        { "2.in", "2-Move.in", "2-Solution.in" },
+        { "3.in", "3-Move.in", "3-Solution.in" },
+        { "4.in", "4-Move.in", "4-Solution.in" },
+        { "5.in", "5-Move.in", "5-Solution.in" },
+        { "6.in", "6-Move.in", "6-Solution.in" }
+     });
+  }
+
+  public GameTest(String board, String move, String solution) {
+    this.boardResource = board;
+    this.moveResource = move;
+    this.solutionResource = solution;
+  }
 
   @Before
   public void initGame() {
     this.game = new Game();
-    String resourceName = "1.in";
     try {
-      BufferedReader reader = readResourceFile(resourceName);
-      game.initializeGameBoard(reader);
+      BufferedReader boardReader = readResourceFile(boardResource);
+      BufferedReader moveReader = readResourceFile(moveResource);
+      this.move = getMove(Integer.parseInt(moveReader.readLine()));
+      game.initializeGameBoard(boardReader);
     } catch(IOException e) {
       e.printStackTrace();
     }
@@ -30,9 +56,8 @@ public class GameTest {
   @Before
   public void initGameSolution() {
     this.gameSolution = new Game();
-    String resourceName = "1-Solution.in";
     try {
-      BufferedReader reader = readResourceFile(resourceName);
+      BufferedReader reader = readResourceFile(solutionResource);
       gameSolution.initializeGameBoard(reader);
     } catch(IOException e) {
       e.printStackTrace();
@@ -47,29 +72,24 @@ public class GameTest {
     return reader;
   }
 
-  @Parameterized.Parameters
-  public static String[] primeNumbers() {
-     return Arrays.asList(new Object[][] {
-        { 2, true },
-        { 6, false },
-        { 19, true },
-        { 22, false },
-        { 23, true }
-     });
+  private Move getMove(int move) {
+    switch(move) {
+      case 0:
+        return Move.Left;
+      case 1:
+        return Move.Up;
+      case 2:
+        return Move.Right;
+      case 3:
+        return Move.Down;
+      default:
+        return null;
+    }
   }
 
   @Test
-  @RunWith(Parameterized.class)
   public void testGame() {
-    this.game.executeMove(Move.Left);
-    Tile[][] gameBoard = this.game.getGameBoard().getGameBoard();
-    Tile[][] gameBoardSolution = this.gameSolution.getGameBoard().getGameBoard();
-    for(int row=0; row<4; row++) {
-      for(int col=0; col<4; col++) {
-        Tile gameTile = gameBoard[row][col];
-        Tile solutionTile = gameBoardSolution[row][col];
-        assertEquals(gameTile.getValue(), solutionTile.getValue());
-      }
-    }
+    this.game.executeMove(this.move);
+    assertEquals(this.gameSolution.getGameBoard().toString(), this.game.getGameBoard().toString());
   }
 }
