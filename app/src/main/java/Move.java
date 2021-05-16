@@ -7,7 +7,10 @@ public enum Move {
           if(tile.getValue() > 0) {
             for(int left=col-1; left>=0; left--) {
               Tile tileOnLeft = gameBoard[row][left];
-              swapTiles(tile, tileOnLeft);
+              boolean breakLoop = swapTiles(tile, tileOnLeft);
+              if(breakLoop) {
+                break;
+              }
             }
           }
         }
@@ -108,21 +111,22 @@ public enum Move {
 
   abstract Tile[][] execute(Tile[][] gameBoard);
 
-  private static void swapTiles(Tile tile, Tile nextTile) {
+  private static boolean swapTiles(Tile tile, Tile nextTile) {
     if(nextTile.getValue() == 0) {
-      //nextTile.setValue(tile.getValue());
-      //tile.setValue(0);
-      nextTile = tile;
-      tile.setValue(0);
-    } else if(nextTile.getValue() == tile.getValue() && !nextTile.getMerged()) {
-      nextTile.setValue(nextTile.getValue()*2);
-      Tile tileTemp = nextTile;
-      tile.setValue(0);
-      tile = tileTemp;
+      Tile tempTile = tile;
+      tile = nextTile;
+      tile.setValue(tempTile.getValue());
+      tempTile.setValue(0);
+      return false;
+    } else if(tile.getValue() == nextTile.getValue() && !nextTile.getMerged()) {
+      Tile tempTile = tile;
+      tile = nextTile;
+      tile.setValue(tempTile.getValue()*2);
+      tempTile.setValue(0);
       tile.setMerged(true);
-      //break;
+      return false;
     } else {
-      //break;
+      return true;
     }
   }
 

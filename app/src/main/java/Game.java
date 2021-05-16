@@ -1,6 +1,9 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
 
 public class Game {
 
@@ -38,7 +41,8 @@ public class Game {
   public static void main(String[] args) {
     Game game = null;
     try {
-      BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+      //BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+      BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\marce\\Documents\\Programming\\Java\\Kattis\\2048\\app\\src\\main\\java\\1.in"));
       game = new Game();
       if(reader.ready()) {
         game.initializeGameBoard(reader);
