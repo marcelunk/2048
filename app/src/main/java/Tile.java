@@ -1,5 +1,3 @@
-// add compareTo method to the class
-
 public class Tile {
 
   private int value;

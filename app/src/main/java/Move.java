@@ -8,13 +8,13 @@ public enum Move {
       for(int row=0; row<4; row++) {
         for(int col=1; col<4; col++) {
           Tile tile = gameState[row][col];
-          executeOneTile(tile, col, row);
+          executeOneTile(tile, row, col);
         }
       }
       return gameState;
     }
 
-    private void executeOneTile(Tile tile, int col, int row) {
+    private void executeOneTile(Tile tile, int row, int col) {
       if(tile.getValue() > 0) {
         for(int left=col-1; left>=0; left--) {
           Tile nextTile = this.gameState[row][left];
@@ -25,63 +25,86 @@ public enum Move {
         }
       }
     }
-
   },
   Up {
-    Tile[][] execute(Tile[][] gameBoard) {
+
+    private Tile[][] gameState;
+
+    Tile[][] execute(Tile[][] gameState) {
+      this.gameState = gameState;
       for(int col=0; col<4; col++) {
         for(int row=1; row<4; row++) {
-          Tile tile = gameBoard[row][col];
-          if(tile.getValue() > 0) {
-            for(int top=row-1; top>=0; top--) {
-              Tile nextTile = gameBoard[top][col];
-              tile = moveTile(tile, nextTile);
-              if(tile == null) {
-                break;
-              }
-            }
+          Tile tile = gameState[row][col];
+          executeOneTile(tile, row, col);
+        }
+      }
+      return gameState;
+    }
+
+    private void executeOneTile(Tile tile, int row, int col) {
+      if(tile.getValue() > 0) {
+        for(int top=row-1; top>=0; top--) {
+          Tile nextTile = gameState[top][col];
+          tile = moveTile(tile, nextTile);
+          if(tile == null) {
+            break;
           }
         }
       }
-      return gameBoard;
     }
   },
   Right {
-    Tile[][] execute(Tile[][] gameBoard) {
+
+    private Tile[][] gameState;
+
+    Tile[][] execute(Tile[][] gameState) {
+      this.gameState = gameState;
       for(int row=3; row>=0; row--) {
         for(int col=2; col>=0; col--) {
-          Tile tile = gameBoard[row][col];
-          if(tile.getValue() > 0) {
-            for(int right=col+1; right<4; right++) {
-              Tile nextTile = gameBoard[row][right];
-              tile = moveTile(tile, nextTile);
-              if(tile == null) {
-                break;
-              }
-            }
+          Tile tile = gameState[row][col];
+          executeOneTile(tile, row, col);
+        }
+      }
+      return gameState;
+    }
+
+    private void executeOneTile(Tile tile, int row, int col) {
+      if(tile.getValue() > 0) {
+        for(int right=col+1; right<4; right++) {
+          Tile nextTile = gameState[row][right];
+          tile = moveTile(tile, nextTile);
+          if(tile == null) {
+            break;
           }
         }
       }
-      return gameBoard;
     }
   },
   Down {
-    Tile[][] execute(Tile[][] gameBoard) {
+
+    private Tile[][] gameState;
+
+    Tile[][] execute(Tile[][] gameState) {
+      this.gameState = gameState;
       for(int col=0; col<4; col++) {
         for(int row=2; row>=0; row--) {
-          Tile tile = gameBoard[row][col];
-          if(tile.getValue() > 0) {
-            for(int below=row+1; below<4; below++) {
-              Tile nextTile = gameBoard[below][col];
-              tile = moveTile(tile, nextTile);
-              if(tile == null) {
-                break;
-              }
-            }
+          Tile tile = gameState[row][col];
+          executeOneTile(tile, row, col);
+        }
+      }
+      return gameState;
+    }
+
+    private void executeOneTile(Tile tile, int row, int col) {
+      if(tile.getValue() > 0) {
+        for(int below=row+1; below<4; below++) {
+          Tile nextTile = gameState[below][col];
+          tile = moveTile(tile, nextTile);
+          if(tile == null) {
+            break;
           }
         }
       }
-      return gameBoard;
     }
   };
 
