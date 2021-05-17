@@ -1,8 +1,8 @@
-public class GameBoard {
+public class GameState {
 
   private Tile[][] gameBoard;
 
-  public GameBoard() {
+  public GameState() {
     this.gameBoard = new Tile[4][4];
   }
 

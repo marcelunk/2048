@@ -5,14 +5,14 @@ import java.io.InputStreamReader;
 
 public class Game {
 
-  private GameBoard gameBoard;
+  private GameState gameState;
 
   public Game() {
-    gameBoard = new GameBoard();
+    gameState = new GameState();
   }
 
   public void printGame() {
-    System.out.println(this.gameBoard);
+    System.out.println(this.gameState);
   }
 
   public void initializeGameBoard(BufferedReader reader) throws IOException {
@@ -22,17 +22,17 @@ public class Game {
         Coordination coordination = new Coordination(row, col);
         int value = Integer.parseInt(rowInput[col]);
         Tile tile = new Tile(value);
-        gameBoard.setTile(coordination, tile);
+        gameState.setTile(coordination, tile);
       }
     }
   }
 
   public void executeMove(Move move) {
-    gameBoard.executeMove(move);
+    gameState.executeMove(move);
   }
 
-  public GameBoard getGameBoard() {
-    return this.gameBoard;
+  public GameState getGameBoard() {
+    return this.gameState;
   }
 
 
