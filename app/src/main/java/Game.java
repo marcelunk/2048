@@ -44,8 +44,6 @@ public class Game {
       game = new Game();
       if(reader.ready()) {
         game.initializeGameBoard(reader);
-        // game.printGame();
-        // System.out.println("-----");
         int moveInMove = Integer.parseInt(reader.readLine());
         Move move = getMove(moveInMove);
         game.executeMove(move);

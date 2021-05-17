@@ -29,4 +29,19 @@ public class Tile {
   public String toString() {
     return String.valueOf(this.value);
   }
+
+  @Override
+  public boolean equals(Object other) {
+    if(!(other instanceof Tile)) {
+      return false;
+    }
+    Tile otherTile = (Tile) other;
+    return (this.value == otherTile.getValue());
+  }
+
+  @Override
+  public int hashCode() {
+    String value = String.valueOf(this.value);
+    return value.hashCode();
+  }
 }

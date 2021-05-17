@@ -1,6 +1,3 @@
-import org.junit.Test;
-import org.junit.Before;
-import static org.junit.Assert.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.File;
@@ -8,6 +5,9 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 
+import static org.junit.Assert.*;
+import org.junit.Test;
+import org.junit.Before;
 import org.junit.runners.Parameterized;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.assertEquals;
